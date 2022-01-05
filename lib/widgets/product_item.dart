@@ -1,19 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:vsfirstapp/screens/product_detail_screen.dart';
 
 class ProductItem extends StatelessWidget {
   final String id;
-  final String title;
+  final String titlee;
   final String imageUrl;
-  ProductItem(this.id, this.title, this.imageUrl);
+  ProductItem(this.id, this.titlee, this.imageUrl);
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
-          child: Image.network(
-            imageUrl,
-            fit: BoxFit.cover,
+          child: GestureDetector(
+            onTap: () {
+/*               Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (cxt) => ProductDetailScreen(),
+                ),
+              ); */
+              Navigator.of(context).pushNamed(
+                ProductDetailScreen.routeName,
+                arguments: id,
+              );
+            },
+            child: Image.network(
+              imageUrl,
+              fit: BoxFit.cover,
+            ),
           ),
           footer: GridTileBar(
             leading: IconButton(
@@ -30,7 +44,7 @@ class ProductItem extends StatelessWidget {
             ),
             backgroundColor: Colors.black54,
             title: Text(
-              title,
+              titlee,
               textAlign: TextAlign.center,
             ),
           )),
