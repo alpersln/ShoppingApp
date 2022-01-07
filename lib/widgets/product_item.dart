@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vsfirstapp/providers/product.dart';
 import 'package:vsfirstapp/screens/product_detail_screen.dart';
 
 class ProductItem extends StatelessWidget {
-  final String id;
+/*   final String id;
   final String titlee;
   final String imageUrl;
-  ProductItem(this.id, this.titlee, this.imageUrl);
+  ProductItem(this.id, this.titlee, this.imageUrl); */
 
   @override
   Widget build(BuildContext context) {
+    final product = Provider.of<Product>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -20,20 +23,26 @@ class ProductItem extends StatelessWidget {
                 ),
               ); */
               Navigator.of(context).pushNamed(
-                ProductDetailScreen.routeName,
-                arguments: id,
-              );
+                  //  ProductDetailScreen.routeName,
+                  '/productDetailSc',
+                  arguments: product.id);
             },
             child: Image.network(
-              imageUrl,
+              product.imageUrl,
               fit: BoxFit.cover,
             ),
           ),
           footer: GridTileBar(
-            leading: IconButton(
-              icon: Icon(Icons.favorite),
-              color: Theme.of(context).accentColor,
-              onPressed: () {},
+            leading: Consumer<Product>(
+              builder: (context, product, child) => IconButton(
+                icon: product.isFavorite
+                    ? Icon(Icons.favorite)
+                    : Icon(Icons.favorite_border),
+                color: Theme.of(context).accentColor,
+                onPressed: () {
+                  product.toggleFavorite();
+                },
+              ),
             ),
             trailing: IconButton(
               icon: Icon(
@@ -44,7 +53,7 @@ class ProductItem extends StatelessWidget {
             ),
             backgroundColor: Colors.black54,
             title: Text(
-              titlee,
+              product.title,
               textAlign: TextAlign.center,
             ),
           )),

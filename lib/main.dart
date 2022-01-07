@@ -23,7 +23,10 @@ class MyApp extends StatelessWidget {
             accentColor: Colors.pink[200],
             fontFamily: "Lato"),
         home: ProductsOverviewScreen(),
-        routes: {ProductDetailScreen.routeName: (ctx) => ProductDetailScreen()},
+        routes: {
+          //  ProductDetailScreen.routeName: (ctx) => ProductDetailScreen()
+          '/productDetailSc': (ctx) => ProductDetailScreen()
+        },
       ),
     );
   }
