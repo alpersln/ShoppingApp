@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vsfirstapp/providers/product.dart';
-import 'package:vsfirstapp/providers/products.dart';
+import 'package:vsfirstapp/providers/cart.dart';
+import 'package:vsfirstapp/widgets/badge.dart';
 import 'package:vsfirstapp/widgets/products_grid.dart';
 
 class ProductsOverviewScreen extends StatefulWidget {
@@ -12,6 +12,7 @@ class ProductsOverviewScreen extends StatefulWidget {
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   var _showOnlyFavorites = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +37,22 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                     ),
                     PopupMenuItem(
                         child: Text("Show All"), value: FilterOptions.All)
-                  ])
+                  ]),
+          Consumer<Cart>(
+            builder: (_, cart, ch) => Badge(
+              child: ch!,
+              value: cart.cartLenght.toString(),
+            ),
+            child: IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: () {
+                Navigator.of(context).pushNamed(
+                  //  ProductDetailScreen.routeName,
+                  '/cartScreen',
+                );
+              },
+            ),
+          )
         ],
       ),
       body: ProductsGrid(_showOnlyFavorites),
