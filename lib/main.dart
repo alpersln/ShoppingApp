@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vsfirstapp/providers/cart.dart';
+import 'package:vsfirstapp/providers/orders.dart';
 import 'package:vsfirstapp/providers/products.dart';
 import 'package:vsfirstapp/screens/cart_screen.dart';
 import 'package:vsfirstapp/screens/product_detail_screen.dart';
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (ctx) => Cart(),
-        )
+        ),
+        ChangeNotifierProvider(create: (ctx) => Orders())
       ],
 
       //  create: (ctx) => Products(),

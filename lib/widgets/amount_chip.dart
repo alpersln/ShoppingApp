@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vsfirstapp/providers/cart.dart';
+import 'package:vsfirstapp/providers/orders.dart';
 
 class AmountChip extends StatelessWidget {
   const AmountChip({Key? key}) : super(key: key);
@@ -53,7 +54,11 @@ class AmountChip extends StatelessWidget {
                 primary: Theme.of(context).primaryColor,
                 textStyle: const TextStyle(fontSize: 16),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Provider.of<Orders>(context, listen: false)
+                    .addOrder(cart.items.values.toList(), cart.totalAmount);
+                cart.clear();
+              },
               child: const Text('ORDER NOW'),
             ),
           ],

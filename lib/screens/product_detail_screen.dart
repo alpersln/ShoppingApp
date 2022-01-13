@@ -16,8 +16,44 @@ class ProductDetailScreen extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as String; //is the id
     final loadedProduct =
         Provider.of<Products>(context, listen: false).findById(productId);
-    return Container(
-      child: Text("This ${loadedProduct.title}"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(loadedProduct.title),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 12,
+          ),
+          Text(
+            loadedProduct.title,
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(22)),
+            child: Image.network(
+              loadedProduct.imageUrl,
+              height: 300,
+              // MediaQuery.of(context).size.height * 0.5,
+              width: double.infinity,
+            ),
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Text(
+            "\$${loadedProduct.price}",
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 22,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

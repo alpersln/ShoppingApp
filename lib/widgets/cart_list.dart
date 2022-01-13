@@ -13,6 +13,7 @@ class CartList extends StatelessWidget {
         itemCount: cart.cartLenght,
         itemBuilder: (ctx, i) => CartListTile(
           cartItemList[i].id,
+          cart.items.keys.toList()[i],
           cartItemList[i].title,
           cartItemList[i].quantity,
           cartItemList[i].price,
