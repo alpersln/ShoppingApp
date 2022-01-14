@@ -34,7 +34,7 @@ class AmountChip extends StatelessWidget {
                 ),
               ),
               label: Text(
-                cart.totalAmount.toString(),
+                cart.totalAmount.toStringAsFixed(2),
                 style: TextStyle(
                     color: Theme.of(context).primaryTextTheme.bodyText1!.color),
               ),
@@ -55,8 +55,11 @@ class AmountChip extends StatelessWidget {
                 textStyle: const TextStyle(fontSize: 16),
               ),
               onPressed: () {
-                Provider.of<Orders>(context, listen: false)
-                    .addOrder(cart.items.values.toList(), cart.totalAmount);
+                Provider.of<Orders>(context, listen: false).addOrder(
+                  cart.items.values.toList(),
+                  cart.totalAmount,
+                  //         cart.titleForOrder
+                );
                 cart.clear();
               },
               child: const Text('ORDER NOW'),

@@ -6,12 +6,15 @@ class OrderItem {
   final double amount;
   final List<CartItem> products;
   final DateTime date;
+  // final String title;
 
-  OrderItem(
-      {required this.id,
-      required this.amount,
-      required this.products,
-      required this.date});
+  OrderItem({
+    required this.id,
+    required this.amount,
+    required this.products,
+    required this.date,
+    //    required this.title
+  });
 }
 
 class Orders with ChangeNotifier {
@@ -21,7 +24,10 @@ class Orders with ChangeNotifier {
     return [..._orders];
   }
 
-  void addOrder(List<CartItem> cartProducts, double totalAmount) {
+  void addOrder(
+    List<CartItem> cartProducts,
+    double totalAmount,
+  ) {
     _orders.insert(
       0,
       OrderItem(
@@ -29,6 +35,7 @@ class Orders with ChangeNotifier {
         amount: totalAmount,
         products: cartProducts,
         date: DateTime.now(),
+        //   title: title,
       ),
     );
     notifyListeners();

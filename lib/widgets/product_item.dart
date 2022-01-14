@@ -36,10 +36,10 @@ class ProductItem extends StatelessWidget {
           footer: GridTileBar(
             leading: Consumer<Product>(
               builder: (context, product, child) => IconButton(
-                icon: product.isFavorite
-                    ? Icon(Icons.favorite)
-                    : Icon(Icons.favorite_border),
-                color: Theme.of(context).accentColor,
+                icon: Icon(product.isFavorite
+                    ? Icons.favorite
+                    : Icons.favorite_border),
+                color: Colors.pink[200],
                 onPressed: () {
                   product.toggleFavorite();
                 },
@@ -48,8 +48,8 @@ class ProductItem extends StatelessWidget {
             trailing: IconButton(
               icon: Icon(
                 Icons.shopping_cart,
-                color: Theme.of(context).accentColor,
               ),
+              color: Theme.of(context).accentColor,
               onPressed: () {
                 cart.addItem(
                     product.id, product.price, product.title, product.imageUrl);

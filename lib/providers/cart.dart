@@ -25,6 +25,14 @@ class Cart with ChangeNotifier {
     return _items.length;
   }
 
+/*   String get titleForOrder {
+    String tt = "-";
+    _items.forEach((key, cartItem) {
+      tt += cartItem.title;
+    });
+    return tt;
+  } */
+
   double get totalAmount {
     double total = 0.0;
     _items.forEach((key, cartItem) {

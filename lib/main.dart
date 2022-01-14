@@ -4,6 +4,7 @@ import 'package:vsfirstapp/providers/cart.dart';
 import 'package:vsfirstapp/providers/orders.dart';
 import 'package:vsfirstapp/providers/products.dart';
 import 'package:vsfirstapp/screens/cart_screen.dart';
+import 'package:vsfirstapp/screens/order_screen.dart';
 import 'package:vsfirstapp/screens/product_detail_screen.dart';
 import 'package:vsfirstapp/screens/product_overview_screen.dart';
 
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
           //  ProductDetailScreen.routeName: (ctx) => ProductDetailScreen()
           '/productDetailSc': (ctx) => ProductDetailScreen(),
           '/cartScreen': (ctx) => CartScreen(),
+          '/orderScreen': (ctx) => OrderScreen(),
         },
       ),
     );
