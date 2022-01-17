@@ -70,6 +70,15 @@ class Cart with ChangeNotifier {
     notifyListeners();
   }
 
+  void removeSingleItemFromSnackbar(String productId) {
+    if (!_items.containsKey(productId)) {
+      return;
+    } else {
+      _items.remove(productId);
+    }
+    notifyListeners();
+  }
+
   void clear() {
     _items = {};
     notifyListeners();

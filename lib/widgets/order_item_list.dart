@@ -40,7 +40,7 @@ class _OrderItemListState extends State<OrderItemList> {
             trailing: Wrap(
               spacing: 12,
               children: [
-                Text("\$${widget.orderItem.amount}"),
+                Text("\$${widget.orderItem.amount.toStringAsFixed(2)}"),
                 IconButton(
                     onPressed: () {
                       setState(() {

@@ -34,6 +34,24 @@ class CartListTile extends StatelessWidget {
         margin: EdgeInsets.all(15),
       ),
       direction: DismissDirection.endToStart,
+      confirmDismiss: (direction) => showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text("Are you sure?"),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop(false);
+                },
+                child: Text("No")),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop(true);
+                },
+                child: Text("Yes"))
+          ],
+        ),
+      ),
       child: Card(
         margin: EdgeInsets.all(15),
         child: Padding(

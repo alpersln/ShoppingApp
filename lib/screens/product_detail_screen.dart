@@ -46,6 +46,13 @@ class ProductDetailScreen extends StatelessWidget {
             height: 12,
           ),
           Text(
+            loadedProduct.description,
+            style: TextStyle(color: Colors.black87, fontSize: 22),
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          Text(
             "\$${loadedProduct.price}",
             style: TextStyle(
               color: Colors.grey,

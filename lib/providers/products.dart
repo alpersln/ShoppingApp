@@ -6,18 +6,18 @@ class Products with ChangeNotifier {
     Product(
       id: 'p1',
       title: 'Red Shirt',
-      description: 'A red shirt - it is pretty red!',
+      description: 'Star Trek TNG Red Shirt Uniform ',
       price: 29.99,
       imageUrl:
-          'https://cdn.pixabay.com/photo/2016/10/02/22/17/red-t-shirt-1710578_1280.jpg',
+          'https://ae01.alicdn.com/kf/HTB1_6VhcBGw3KVjSZFwq6zQ2FXaJ/Star-TNG-The-Next-Generation-Trek-Red-Shirt-Uniform-Cosplay-Costume-For-Men-Coat-Halloween-Party.jpg_Q90.jpg_.webp',
     ),
     Product(
       id: 'p2',
-      title: 'Trousers',
-      description: 'A nice pair of trousers.',
+      title: 'Shoes',
+      description: 'Nike Kobe 7 USA Olympic Team Shoes.',
       price: 59.99,
       imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trousers%2C_dress_%28AM_1960.022-8%29.jpg/512px-Trousers%2C_dress_%28AM_1960.022-8%29.jpg',
+          'https://di2ponv0v5otw.cloudfront.net/posts/2020/01/28/5e304a82eeb523dfc22f449c/m_5e304a86264a5577064c1f22.jpeg',
     ),
     Product(
       id: 'p3',
@@ -29,11 +29,11 @@ class Products with ChangeNotifier {
     ),
     Product(
       id: 'p4',
-      title: 'A Pan',
-      description: 'Prepare any meal you want.',
+      title: 'Chair',
+      description: 'Touchwood bar chair, 75 cm, black steel.',
       price: 49.99,
       imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
+          'https://media.fds.fi/product_image/800/Touchwood-baarijakkara-75-cm-musta-musta-teras.jpg',
     ),
   ];
 
