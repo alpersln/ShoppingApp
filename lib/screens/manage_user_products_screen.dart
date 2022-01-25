@@ -16,7 +16,8 @@ class ManageUserProductScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed('/manageEditProductScreen');
+                Navigator.of(context).pushNamed('/manageEditProductScreen',
+                    arguments: 'newProduct');
               },
               icon: Icon(Icons.add))
         ],
@@ -27,6 +28,7 @@ class ManageUserProductScreen extends StatelessWidget {
         child: ListView.builder(
           itemCount: productsData.items.length,
           itemBuilder: (_, i) => ManageProductItem(
+            productsData.items[i].id,
             productsData.items[i].title,
             productsData.items[i].imageUrl,
           ),

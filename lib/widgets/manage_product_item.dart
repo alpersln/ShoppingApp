@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vsfirstapp/providers/products.dart';
 
 class ManageProductItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageUrl;
 
-  const ManageProductItem(this.title, this.imageUrl);
+  const ManageProductItem(this.id, this.title, this.imageUrl);
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +20,19 @@ class ManageProductItem extends StatelessWidget {
         trailing: Wrap(
           children: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed('/manageEditProductScreen', arguments: id);
+                },
                 icon: Icon(
                   Icons.edit,
                   color: Theme.of(context).primaryColor,
                 )),
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Provider.of<Products>(context, listen: false)
+                      .deleteProduct(id);
+                },
                 icon: Icon(
                   Icons.delete,
                   color: Theme.of(context).errorColor,
