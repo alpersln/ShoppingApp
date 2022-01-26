@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:vsfirstapp/providers/product.dart';
+import 'package:http/http.dart' as http;
 
 class Products with ChangeNotifier {
   List<Product> _items = [
@@ -45,17 +48,60 @@ class Products with ChangeNotifier {
     return _items.where((i) => i.isFavorite).toList();
   }
 
-  void addProduct(Product product) {
-    final newProduct = Product(
-      id: DateTime.now().toString(),
-      title: product.title,
-      description: product.description,
-      price: product.price,
-      imageUrl: product.imageUrl,
-    );
-    _items.add(newProduct);
-    // _items.insert(0, newProduct);
-    notifyListeners();
+  Future<void> fetchAndSetProducts() async {
+    final url = Uri.parse(
+        'https://shopapp-15e24-default-rtdb.europe-west1.firebasedatabase.app/product.json');
+
+    try {
+      final response = await http.get(url);
+      final prodmap = json.decode(response.body) as Map<String, dynamic>;
+      final List<Product> loadedProduct = [];
+      prodmap.forEach((prodId, prodData) {
+        loadedProduct.add(Product(
+            id: prodId,
+            title: prodData['title'],
+            description: prodData['description'],
+            price: prodData['price'],
+            imageUrl: prodData['imageUrl'],
+            isFavorite: prodData['isFavorite']));
+      });
+      //   print(json.decode(response.body));
+      //  print(loadedProduct.map((e) => e.title));
+      _items = loadedProduct;
+      notifyListeners();
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  Future<void> addProduct(Product product) async {
+    final url = Uri.parse(
+        'https://shopapp-15e24-default-rtdb.europe-west1.firebasedatabase.app/product.json');
+    try {
+      final response = await http.post(url,
+          body: json.encode({
+            'title': product.title,
+            'description': product.description,
+            'price': product.price,
+            'imageUrl': product.imageUrl,
+            'isFavorite': product.isFavorite,
+          }));
+
+      final newProduct = Product(
+        id: json.decode(response.body)['name'],
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        imageUrl: product.imageUrl,
+      );
+
+      _items.add(newProduct);
+      // _items.insert(0, newProduct);
+      notifyListeners();
+    } catch (error) {
+      print(error);
+      throw error;
+    }
   }
 
   void updateProduct(String id, Product newProduct) {
