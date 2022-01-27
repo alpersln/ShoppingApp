@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class Products with ChangeNotifier {
   List<Product> _items = [
-    Product(
+/*     Product(
       id: 'p1',
       title: 'Red Shirt',
       description: 'Star Trek TNG Red Shirt Uniform ',
@@ -37,7 +37,7 @@ class Products with ChangeNotifier {
       price: 49.99,
       imageUrl:
           'https://media.fds.fi/product_image/800/Touchwood-baarijakkara-75-cm-musta-musta-teras.jpg',
-    ),
+    ), */
   ];
 
   List<Product> get items {
@@ -58,19 +58,21 @@ class Products with ChangeNotifier {
       final List<Product> loadedProduct = [];
       prodmap.forEach((prodId, prodData) {
         loadedProduct.add(Product(
-            id: prodId,
-            title: prodData['title'],
-            description: prodData['description'],
-            price: prodData['price'],
-            imageUrl: prodData['imageUrl'],
-            isFavorite: prodData['isFavorite']));
+          id: prodId,
+          title: prodData['title'],
+          description: prodData['description'],
+          price: prodData['price'],
+          isFavorite: prodData['isFavorite'],
+          imageUrl: prodData['imageUrl'],
+        ));
       });
       //   print(json.decode(response.body));
       //  print(loadedProduct.map((e) => e.title));
       _items = loadedProduct;
       notifyListeners();
-    } catch (e) {
-      throw (e);
+    } catch (error) {
+      print(error);
+      throw (error);
     }
   }
 
@@ -104,9 +106,19 @@ class Products with ChangeNotifier {
     }
   }
 
-  void updateProduct(String id, Product newProduct) {
+  Future<void> updateProduct(String id, Product newProduct) async {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
+
     if (prodIndex >= 0) {
+      final url = Uri.parse(
+          'https://shopapp-15e24-default-rtdb.europe-west1.firebasedatabase.app/product/$id.json');
+      await http.patch(url,
+          body: json.encode({
+            'title': newProduct.title,
+            'description': newProduct.description,
+            'imageUrl': newProduct.imageUrl,
+            'price': newProduct.price,
+          }));
       _items[prodIndex] = newProduct;
       notifyListeners();
     } else {

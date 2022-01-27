@@ -7,9 +7,14 @@ import 'package:vsfirstapp/widgets/manage_product_item.dart';
 class ManageUserProductScreen extends StatelessWidget {
   const ManageUserProductScreen({Key? key}) : super(key: key);
 
+  Future<void> _refreshProducts(BuildContext context) async {
+    await Provider.of<Products>(context, listen: false).fetchAndSetProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Manage Products"),
@@ -23,14 +28,17 @@ class ManageUserProductScreen extends StatelessWidget {
         ],
       ),
       drawer: AppDrawer(),
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: ListView.builder(
-          itemCount: productsData.items.length,
-          itemBuilder: (_, i) => ManageProductItem(
-            productsData.items[i].id,
-            productsData.items[i].title,
-            productsData.items[i].imageUrl,
+      body: RefreshIndicator(
+        onRefresh: () => _refreshProducts(context),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: ListView.builder(
+            itemCount: productsData.items.length,
+            itemBuilder: (_, i) => ManageProductItem(
+              productsData.items[i].id,
+              productsData.items[i].title,
+              productsData.items[i].imageUrl,
+            ),
           ),
         ),
       ),

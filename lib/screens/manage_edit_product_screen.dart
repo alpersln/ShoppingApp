@@ -98,6 +98,7 @@ class _ManageEditProductScreenState extends State<ManageEditProductScreen> {
       setState(() {
         _isLoading = false;
       });
+      Navigator.of(context).pop();
     } else {
       try {
         await Provider.of<Products>(context, listen: false)
@@ -122,7 +123,6 @@ class _ManageEditProductScreenState extends State<ManageEditProductScreen> {
         });
         Navigator.of(context).pop();
       }
-      ;
     }
   }
 
