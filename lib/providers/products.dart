@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:vsfirstapp/models/http_exception.dart';
 import 'package:vsfirstapp/providers/product.dart';
 import 'package:http/http.dart' as http;
 
@@ -54,9 +55,12 @@ class Products with ChangeNotifier {
 
     try {
       final response = await http.get(url);
-      final prodmap = json.decode(response.body) as Map<String, dynamic>;
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      if (extractedData == null) {
+        return;
+      }
       final List<Product> loadedProduct = [];
-      prodmap.forEach((prodId, prodData) {
+      extractedData.forEach((prodId, prodData) {
         loadedProduct.add(Product(
           id: prodId,
           title: prodData['title'],
@@ -126,9 +130,22 @@ class Products with ChangeNotifier {
     }
   }
 
-  void deleteProduct(String id) {
-    _items.removeWhere((prod) => prod.id == id);
+  Future<void> deleteProduct(String id) async {
+    final url = Uri.parse(
+        'https://shopapp-15e24-default-rtdb.europe-west1.firebasedatabase.app/product/$id.json');
+    final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
+    Product? existingProduct = _items[existingProductIndex];
+    _items.removeAt(existingProductIndex);
     notifyListeners();
+    final response = await http.delete(url);
+    if (response.statusCode >= 400) {
+      _items.insert(existingProductIndex, existingProduct);
+      notifyListeners();
+      throw HttpException('Could not delete product');
+    }
+    existingProduct = null;
+
+    ;
   }
 
   Product findById(String id) {

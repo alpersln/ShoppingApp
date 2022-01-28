@@ -49,24 +49,54 @@ class AmountChip extends StatelessWidget {
             SizedBox(
               width: 10,
             ),
-            TextButton(
-              style: TextButton.styleFrom(
-                primary: Theme.of(context).primaryColor,
-                textStyle: const TextStyle(fontSize: 16),
-              ),
-              onPressed: () {
-                Provider.of<Orders>(context, listen: false).addOrder(
-                  cart.items.values.toList(),
-                  cart.totalAmount,
-                  //         cart.titleForOrder
-                );
-                cart.clear();
-              },
-              child: const Text('ORDER NOW'),
-            ),
+            OrderButton(cart: cart),
           ],
         ),
       ),
     );
+  }
+}
+
+class OrderButton extends StatefulWidget {
+  const OrderButton({
+    Key? key,
+    required this.cart,
+  }) : super(key: key);
+
+  final Cart cart;
+
+  @override
+  State<OrderButton> createState() => _OrderButtonState();
+}
+
+class _OrderButtonState extends State<OrderButton> {
+  var _isLoading = false;
+  @override
+  Widget build(BuildContext context) {
+    return _isLoading
+        ? CircularProgressIndicator()
+        : TextButton(
+            style: TextButton.styleFrom(
+              primary: Theme.of(context).primaryColor,
+              textStyle: const TextStyle(fontSize: 16),
+            ),
+            onPressed: (widget.cart.totalAmount <= 0 || _isLoading)
+                ? null
+                : () async {
+                    setState(() {
+                      _isLoading = true;
+                    });
+                    await Provider.of<Orders>(context, listen: false).addOrder(
+                      widget.cart.items.values.toList(),
+                      widget.cart.totalAmount,
+                      //         cart.titleForOrder
+                    );
+                    setState(() {
+                      _isLoading = false;
+                    });
+                    widget.cart.clear();
+                  },
+            child: const Text('ORDER NOW'),
+          );
   }
 }
