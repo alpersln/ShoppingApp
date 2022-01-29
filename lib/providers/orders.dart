@@ -52,7 +52,7 @@ class Orders with ChangeNotifier {
         date: DateTime.parse(orderData['date']),
       ));
     });
-    _orders = loadedOrders;
+    _orders = loadedOrders.reversed.toList();
     notifyListeners();
   }
 
@@ -76,12 +76,7 @@ class Orders with ChangeNotifier {
         'date': timestamp.toIso8601String(),
       }),
     );
-/*     final aa = cartProducts.map((e) => e.price);
-    print(aa);
-    final bb = cartProducts.map((e) => {e.price, e.quantity});
-    print(bb);
-    final cc = cartProducts.map((e) => {e.price, e.quantity}).toList();
-    print(cc); */
+
     _orders.insert(
       0,
       OrderItem(
