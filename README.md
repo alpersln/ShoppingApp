@@ -2,8 +2,9 @@
 
 A new Flutter project.
 
+![Android-Emulator-Pixel-3a-XL-API (1)](https://user-images.githubusercontent.com/80425427/163477101-2ef76b6b-552a-4dec-82e4-0f5a85dd24df.gif)
 
-![Android Emulator - Pixel_3a_XL_API_30_5554 2022-01-29 22-48-34](https://user-images.githubusercontent.com/80425427/151675559-1ed74d1d-ee98-4c69-80a0-d0c1ba8e6346.gif)
+
 
 ## Getting Started
 
