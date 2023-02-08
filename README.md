@@ -1,10 +1,15 @@
 # Shop-App
 
+**- Used Firebase Realtime Database to store products & ordered products.**
+
+**- Used multiple providers for state management.**
+
+
+
+https://user-images.githubusercontent.com/80425427/217620525-a89c376e-366d-4a04-af6a-d0bf4988fc84.mov
+
+
 A new Flutter project.
-
-![Android-Emulator-Pixel-3a-XL-API (1)](https://user-images.githubusercontent.com/80425427/163477101-2ef76b6b-552a-4dec-82e4-0f5a85dd24df.gif)
-
-
 
 ## Getting Started
 
